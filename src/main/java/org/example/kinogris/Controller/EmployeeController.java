@@ -17,31 +17,31 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
+    @GetMapping("/kinogrisen/employees")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/kinogris/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
         return employeeService.getEmployeeById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/kinogrisen/employees")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/kinogrisen/employees/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee employeeDetails) {
         return employeeService.updateEmployee(id, employeeDetails)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/kinogrisen/employees/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
         if (employeeService.deleteEmployee(id)) {
             return ResponseEntity.noContent().build();
