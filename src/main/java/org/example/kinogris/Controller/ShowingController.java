@@ -17,31 +17,31 @@ public class ShowingController {
         this.showingService = showingService;
     }
 
-    @GetMapping
+    @GetMapping("/kinogrisen/showings")
     public List<Showing> getAllShowings() {
         return showingService.getAllShowings();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/kinogrisen/showings/{id}")
     public ResponseEntity<Showing> getShowingById(@PathVariable int id) {
         return showingService.getShowingById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/kinogrisen/showings")
     public Showing createShowing(@RequestBody Showing showing) {
         return showingService.saveShowing(showing);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/kinogrisen/showings/{id}")
     public ResponseEntity<Showing> updateShowing(@PathVariable int id, @RequestBody Showing showingDetails) {
         return showingService.updateShowing(id, showingDetails)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/kinogrisen/showings/{id}")
     public ResponseEntity<Void> deleteShowing(@PathVariable int id) {
         if (showingService.deleteShowing(id)) {
             return ResponseEntity.noContent().build();

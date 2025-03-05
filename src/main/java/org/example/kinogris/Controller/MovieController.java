@@ -17,31 +17,31 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping
+    @GetMapping("/kinogrisen/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/kinogrisen/movies/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
         return movieService.getMovieById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/kinogrisen/movies")
     public Movie createMovie(@RequestBody Movie movie) {
         return movieService.saveMovie(movie);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/kinogrisen/movies/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movieDetails) {
         return movieService.updateMovie(id, movieDetails)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/kinogrisen/movies/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable int id) {
         if (movieService.deleteMovie(id)) {
             return ResponseEntity.noContent().build();
