@@ -1,59 +1,52 @@
 package org.example.kinogris.Controller;
 
 import org.example.kinogris.Model.Movie;
-import org.example.kinogris.Repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.example.kinogris.Service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequestMapping("/movies")
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
-    public MovieController(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    @GetMapping("/movies")
+    @GetMapping
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        return movieService.getAllMovies();
     }
 
-    @PostMapping("/newmovie")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        try {
-            Movie mov1 = movieRepository.save(movie);
-            return new ResponseEntity<>(mov1, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/{id}")
+    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
+        return movieService.getMovieById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("updatemovie")
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
-        Optional<Movie> mov = movieRepository.findById(movie.getMovieID());
-        if (mov.isPresent()) {
-            movieRepository.save(mov.get());
-            return new ResponseEntity<>(mov.get(), HttpStatus.OK);
+    @PostMapping
+    public Movie createMovie(@RequestBody Movie movie) {
+        return movieService.saveMovie(movie);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movieDetails) {
+        return movieService.updateMovie(id, movieDetails)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable int id) {
+        if (movieService.deleteMovie(id)) {
+            return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @DeleteMapping("employee/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathVariable int id) {
-        Optional<Movie> mov = movieRepository.findById(id);
-        if (mov.isPresent()) {
-            movieRepository.delete(mov.get());
-            return new ResponseEntity<>(mov.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 }
