@@ -24,12 +24,12 @@ public class Showing {
     private Date EndTime;
     private boolean isActive;
 
-    public Showing(int ShowingID, Movie movie, Theater theater, Date StartTime, Date EndTime, boolean isActive) {
-        this.ShowingID = ShowingID;
+    public Showing(int showingID, Movie movie, Theater theater, Date startTime, Date endTime, boolean isActive) {
+        ShowingID = showingID;
         this.movie = movie;
         this.theater = theater;
-        this.StartTime = StartTime;
-        this.EndTime = EndTime;
+        StartTime = startTime;
+        EndTime = endTime;
         this.isActive = isActive;
     }
 
