@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "showing")
+@Table(name = "showings")
 public class Showing {
 
     @Id
@@ -33,7 +33,7 @@ public class Showing {
         this.isActive = isActive;
     }
 
-    public Showing() {}
+    protected Showing() {}
 
     public int getShowingID() {
         return ShowingID;

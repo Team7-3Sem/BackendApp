@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 public class Movie {
 
     @Id
@@ -37,7 +37,7 @@ public class Movie {
         this.showings = showings;
     }
 
-    public Movie() {}
+    protected Movie() {}
 
     public int getMovieID() {
         return MovieID;
