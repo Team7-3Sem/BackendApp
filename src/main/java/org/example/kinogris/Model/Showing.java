@@ -1,7 +1,6 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -9,46 +8,43 @@ import java.util.Date;
 public class Showing {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ShowingID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "showing_id")
+    private int showingID;
 
     @ManyToOne
-    @JoinColumn(name = "MovieID", referencedColumnName = "MovieID")
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "TheaterID", referencedColumnName = "TheaterID")
+    @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
 
-    private Date StartTime;
-    private Date EndTime;
-    private boolean isActive;
+    @Column(name = "start_time")
+    private Date startTime;
 
-    public Showing(int showingID, Movie movie, Theater theater, Date startTime, Date endTime, boolean isActive) {
-        ShowingID = showingID;
-        this.movie = movie;
-        this.theater = theater;
-        StartTime = startTime;
-        EndTime = endTime;
-        this.isActive = isActive;
-    }
+    @Column(name = "end_time")
+    private Date endTime;
+
+    @Column(name = "is_active")
+    private boolean isActive;
 
     protected Showing() {}
 
+    public Showing(Movie movie, Theater theater, Date startTime, Date endTime, boolean isActive) {
+        this.movie = movie;
+        this.theater = theater;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isActive = isActive;
+    }
+
     public int getShowingID() {
-        return ShowingID;
+        return showingID;
     }
 
     public void setShowingID(int showingID) {
-        ShowingID = showingID;
-    }
-
-    public Theater getTheater() {
-        return theater;
-    }
-
-    public void setTheater(Theater theater) {
-        this.theater = theater;
+        this.showingID = showingID;
     }
 
     public Movie getMovie() {
@@ -59,20 +55,28 @@ public class Showing {
         this.movie = movie;
     }
 
-    public Date getEndTime() {
-        return EndTime;
+    public Theater getTheater() {
+        return theater;
     }
 
-    public void setEndTime(Date endTime) {
-        EndTime = endTime;
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 
     public Date getStartTime() {
-        return StartTime;
+        return startTime;
     }
 
     public void setStartTime(Date startTime) {
-        StartTime = startTime;
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public boolean isActive() {

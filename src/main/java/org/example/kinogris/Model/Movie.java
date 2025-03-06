@@ -1,7 +1,6 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -10,49 +9,53 @@ import java.util.List;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int MovieID;
-    private String movieTitle;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id")
+    private int movieID;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "genre")
     private String genre;
+
+    @Column(name = "age_restriction")
     private int ageRestriction;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "duration")
     private int duration;
+
+    @Column(name = "release_date")
     private Date releaseDate;
+
+    @Column(name = "end_date")
     private Date endDate;
+
+    @Column(name = "is_active")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Showing> showings;
-
-    public Movie(int movieID, String movieTitle, String genre, int ageRestriction, String description, int duration, Date releaseDate, Date endDate, boolean isActive, List<Showing> showings) {
-        MovieID = movieID;
-        this.movieTitle = movieTitle;
-        this.genre = genre;
-        this.ageRestriction = ageRestriction;
-        this.description = description;
-        this.duration = duration;
-        this.releaseDate = releaseDate;
-        this.endDate = endDate;
-        this.isActive = isActive;
-        this.showings = showings;
-    }
 
     protected Movie() {}
 
     public int getMovieID() {
-        return MovieID;
+        return movieID;
     }
 
     public void setMovieID(int movieID) {
-        MovieID = movieID;
+        this.movieID = movieID;
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getGenre() {

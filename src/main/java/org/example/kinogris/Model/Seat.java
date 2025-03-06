@@ -3,20 +3,23 @@ package org.example.kinogris.Model;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "seats")
+@Table(name = "seats")
 public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seat_id")
     private int seatId;
 
     @ManyToOne
-    @JoinColumn(name = "theater_id", nullable = false)
+    @JoinColumn(name = "theater_id", nullable = false)  // FK to Theater
     private Theater theater;
 
+    @Column(name = "seat_number", nullable = false)
     private int seatNumber;
-    private int rowNumber;
 
+    @Column(name = "row_number", nullable = false)
+    private int rowNumber;
 
     protected Seat() {}
 
@@ -26,12 +29,12 @@ public class Seat {
         this.rowNumber = rowNumber;
     }
 
-    public int getRowNumber() {
-        return rowNumber;
-    }
-
     public int getSeatId() {
         return seatId;
+    }
+
+    public int getRowNumber() {
+        return rowNumber;
     }
 
     public int getSeatNumber() {
