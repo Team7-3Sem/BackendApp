@@ -1,67 +1,89 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "reservations")
 public class Reservation {
 
     @Id
-    private int id;
-    private int showingId;
-    private String costumerName;
-    private String costumerPhone;
-    private String costumerEmail;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id")
+    private int reservationId;
+
+    @ManyToOne
+    @JoinColumn(name = "showing_id", nullable = false)
+    private Showing showing;
+
+    @Column(name = "customer_name", nullable = false)
+    private String customerName;
+
+    @Column(name = "customer_phone")
+    private String customerPhone;
+
+    @Column(name = "customer_email")
+    private String customerEmail;
+
+    @Column(name = "reservation_time")
     private LocalDate reservationTime;
+
+    @Column(name = "reservation_date")
     private LocalDate reservationDate;
+
+    @Column(name = "is_paid")
     private boolean isPaid;
 
     @ManyToMany
-    @JoinTable(name = "reservation_seats", joinColumns = @JoinColumn(name = "reservation_id"), inverseJoinColumns = @JoinColumn(name = "seat_id"))
+    @JoinTable(
+            name = "reservation_seats",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
     private Set<Seat> seats = new HashSet<>();
 
+    protected Reservation() {}
 
-    public int getId() {
-        return id;
+    public int getReservationId() {
+        return reservationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public int getShowingId() {
-        return showingId;
+    public Showing getShowing() {
+        return showing;
     }
 
-    public void setShowingId(int showingId) {
-        this.showingId = showingId;
+    public void setShowing(Showing showing) {
+        this.showing = showing;
     }
 
-    public String getCostumerName() {
-        return costumerName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCostumerName(String costumerName) {
-        this.costumerName = costumerName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getCostumerEmail() {
-        return costumerEmail;
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
-    public void setCostumerEmail(String costumerEmail) {
-        this.costumerEmail = costumerEmail;
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
-    public String getCostumerPhone() {
-        return costumerPhone;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setCostumerPhone(String costumerPhone) {
-        this.costumerPhone = costumerPhone;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public LocalDate getReservationTime() {
@@ -86,5 +108,13 @@ public class Reservation {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
     }
 }

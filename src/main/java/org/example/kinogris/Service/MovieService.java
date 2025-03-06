@@ -30,7 +30,7 @@ public class MovieService {
 
     public Optional<Movie> updateMovie(int id, Movie movieDetails) {
         return movieRepository.findById(id).map(movie -> {
-            movie.setMovieTitle(movieDetails.getMovieTitle());
+            movie.setTitle(movieDetails.getTitle());
             movie.setGenre(movieDetails.getGenre());
             movie.setAgeRestriction(movieDetails.getAgeRestriction());
             movie.setDescription(movieDetails.getDescription());
