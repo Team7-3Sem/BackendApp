@@ -17,9 +17,8 @@ public class TheaterService {
         this.theaterRepository = theaterRepository;
     }
 
-    public ResponseEntity<Theater> createTheater(Theater theater) {
-        theaterRepository.save(theater);
-        return new ResponseEntity<>(theater, HttpStatus.CREATED);
+    public Theater createTheater(Theater theater) {
+       return theaterRepository.save(theater);
     }
 
     public Set<Theater> getTheatres(){
