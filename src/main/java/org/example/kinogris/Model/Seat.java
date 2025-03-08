@@ -18,7 +18,7 @@ public class Seat {
     @Column(name = "seat_number", nullable = false)
     private int seatNumber;
 
-    @Column(name = "row_number", nullable = false)
+    @Column(name = "seat_row", nullable = false)
     private int rowNumber;
 
     protected Seat() {}
