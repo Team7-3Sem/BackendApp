@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slet en film</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Slet en film</h1>
+<form id="deleteMovieForm">
+    <label for="movieId">Film ID:</label>
+    <input type="number" id="movieId" name="movieId" required>
+    <button type="button" onclick="deleteMovie()">Slet film</button>
+</form>
+
+<div id="responseMessage"></div>
+
+<script>
+    function deleteMovie() {
+        const movieId = document.getElementById('movieId').value;
+
+        if (movieId) {
+            fetch(`/movies/kinogrisen/movies/${movieId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    const messageDiv = document.getElementById('responseMessage');
+                    if (response.status === 204) {
+                        messageDiv.innerHTML = `<p>Filmen med ID ${movieId} er blevet slettet.</p>`;
+                    } else if (response.status === 404) {
+                        messageDiv.innerHTML = `<p>Film med ID ${movieId} blev ikke fundet.</p>`;
+                    } else {
+                        messageDiv.innerHTML = `<p>Der skete en fejl. Prøv igen.</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Fejl:', error);
+                });
+        }
+    }
+</script>
+</body>
+</html>

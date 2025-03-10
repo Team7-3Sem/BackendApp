@@ -1,6 +1,8 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 @Entity
@@ -13,12 +15,15 @@ public class Theater {
     private int theaterId;
 
     @Column(name = "theater_name", nullable = false)
+    @NotBlank(message = "Navn mangler")
     private String theaterName;
 
     @Column(name = "row_count", nullable = false)
+    @NotBlank(message = "Antal rækker mangler")
     private int rowCount;
 
     @Column(name = "seats_per_row", nullable = false)
+    @NotBlank(message = "Antal sæder per række mangler")
     private int seatsPerRow;
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)

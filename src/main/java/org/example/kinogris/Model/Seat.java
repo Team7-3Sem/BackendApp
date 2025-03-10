@@ -1,6 +1,7 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "seats")
@@ -16,9 +17,11 @@ public class Seat {
     private Theater theater;
 
     @Column(name = "seat_number", nullable = false)
+    @NotNull(message = "Nummer på sæde mangler")
     private int seatNumber;
 
     @Column(name = "seat_row", nullable = false)
+    @NotNull(message = "Rækkenummer mangler")
     private int rowNumber;
 
     protected Seat() {}

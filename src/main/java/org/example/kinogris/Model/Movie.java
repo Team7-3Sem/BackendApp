@@ -3,6 +3,7 @@ package org.example.kinogris.Model;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "movies")
@@ -14,21 +15,29 @@ public class Movie {
     private int movieID;
 
     @Column(name = "title", nullable = false)
+    @NotBlank(message = "Titel mangler")
+    @Size(max = 100, message = "Titel kan maksimalt være 100 karakterer")
     private String title;
 
     @Column(name = "genre")
+    @NotBlank(message = "Genre mangler")
     private String genre;
 
     @Column(name = "age_restriction")
+    @Min(value = 0, message = "Aldersgrænse skal minimum være 0")
+    @Max(value = 21, message = "Aldersgrænse kan ikke være højere end 21")
     private int ageRestriction;
 
     @Column(name = "description")
+    @Size(max = 500, message = "Beskrivelse kan ikke være højere end 500 karaktere")
     private String description;
 
     @Column(name = "duration")
+    @Positive(message = "Varighed skal være et positivt tal")
     private int duration;
 
     @Column(name = "release_date")
+    @NotNull(message = "Udgivelsesdato mangler")
     private Date releaseDate;
 
     @Column(name = "end_date")
