@@ -41,6 +41,7 @@ public class TheaterController {
    // @GetMapping("/kinogrisen/theatres/statistics")
     @PutMapping("kinogrisen/theatres/{id}")
     public ResponseEntity<Theater> updateTheater(@PathVariable int id, Theater theater) {
-    return null;
+    return theaterService.updateTheater(id, theater).map(ResponseEntity::ok).
+            orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
