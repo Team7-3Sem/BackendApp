@@ -38,7 +38,7 @@ public class TheaterController {
         return theaterService.createTheater(theater);
     }
 
-   // @GetMapping("/kinogrisen/theatres/statistics")
+   // @GetMapping("/kinogrisen/theatres/statis
     @PutMapping("kinogrisen/theatres/{id}")
     public ResponseEntity<Theater> updateTheater(@PathVariable int id, Theater theater) {
     return theaterService.updateTheater(id, theater).map(ResponseEntity::ok).
