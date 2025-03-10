@@ -1,5 +1,6 @@
 package org.example.kinogris.Service;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Theater;
 import org.example.kinogris.Repository.TheaterRepository;
 import org.springframework.http.HttpStatus;
@@ -44,5 +45,14 @@ public class TheaterService {
         theaterLayout.add(theater.getRowCount());
         theaterLayout.add(theater.getSeatsPerRow());
         return theaterLayout;
+    }
+
+    public Optional<Theater>updateTheater(int id, @Valid Theater theater){
+        return theaterRepository.findById(id).map(Theater ->{
+            Theater.setTheaterName(theater.getTheaterName());
+            Theater.setSeatsPerRow(theater.getSeatsPerRow());
+            Theater.setRowCount(theater.getRowCount());
+            return theaterRepository.save(Theater);
+        });
     }
 }
