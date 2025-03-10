@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,12 +35,12 @@ public class Reservation {
     private String customerEmail;
 
     @Column(name = "reservation_time")
-    @NotBlank(message = "Reservationstid mangler")
-    private LocalDate reservationTime;
+    @NotNull(message = "Reservationstid mangler")
+    private Date reservationTime;
 
     @Column(name = "reservation_date")
-    @NotBlank(message = "Reservationsdato mangler")
-    private LocalDate reservationDate;
+    @NotNull(message = "Reservationsdato mangler")
+    private Date reservationDate;
 
     @Column(name = "is_paid")
     private boolean isPaid;
@@ -94,19 +95,19 @@ public class Reservation {
         this.customerEmail = customerEmail;
     }
 
-    public LocalDate getReservationTime() {
+    public Date getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(LocalDate reservationTime) {
+    public void setReservationTime(Date reservationTime) {
         this.reservationTime = reservationTime;
     }
 
-    public LocalDate getReservationDate() {
+    public Date getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(LocalDate reservationDate) {
+    public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
 

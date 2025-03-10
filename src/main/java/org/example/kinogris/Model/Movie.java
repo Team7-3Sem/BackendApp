@@ -34,6 +34,7 @@ public class Movie {
 
     @Column(name = "duration")
     @Positive(message = "Varighed skal være et positivt tal")
+    @NotNull(message = "Der skal udfyldes varighed")
     private int duration;
 
     @Column(name = "release_date")
@@ -41,6 +42,7 @@ public class Movie {
     private Date releaseDate;
 
     @Column(name = "end_date")
+    @NotNull(message = "Slutdato mangler")
     private Date endDate;
 
     @Column(name = "is_active")
