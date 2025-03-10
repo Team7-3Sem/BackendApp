@@ -2,6 +2,7 @@ package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -23,11 +24,11 @@ public class Showing {
     private Theater theater;
 
     @Column(name = "start_time")
-    @NotBlank(message = "Starttid mangler")
+    @NotNull(message = "Starttid mangler")
     private Date startTime;
 
     @Column(name = "end_time")
-    @NotBlank(message = "Sluttid mangler")
+    @NotNull(message = "Sluttid mangler")
     private Date endTime;
 
     @Column(name = "is_active")

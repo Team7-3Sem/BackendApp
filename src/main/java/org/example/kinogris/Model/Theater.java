@@ -2,6 +2,7 @@ package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class Theater {
     private String theaterName;
 
     @Column(name = "row_count", nullable = false)
-    @NotBlank(message = "Antal rækker mangler")
+    @NotNull(message = "Antal rækker mangler")
     private int rowCount;
 
     @Column(name = "seats_per_row", nullable = false)
-    @NotBlank(message = "Antal sæder per række mangler")
+    @NotNull(message = "Antal sæder per række mangler")
     private int seatsPerRow;
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, orphanRemoval = true)
