@@ -102,7 +102,7 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public boolean getIsPaid() {
+    public boolean IsPaid() {
         return isPaid;
     }
 
