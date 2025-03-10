@@ -1,5 +1,6 @@
 package org.example.kinogris.Controller;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Theater;
 import org.example.kinogris.Service.TheaterService;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class TheaterController {
     }
 
     @PostMapping("/kinogrisen/theatres")
-    public Theater createTheater(@RequestBody Theater theater) {
+    public Theater createTheater(@Valid @RequestBody Theater theater) {
         return theaterService.createTheater(theater);
     }
 

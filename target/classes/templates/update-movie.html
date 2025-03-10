@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link th:href="@{/css/main.css}" rel="stylesheet">
+  <link th:href="@{/css/formbox.css}" rel="stylesheet">
+
+  <title>Opdater film</title>
+
+</head>
+
+<body>
+
+  <div class="movie-container">
+
+    <div class="form-container">
+
+      <div class="form-box">
+        <h1>Opdater film</h1>
+
+        <form th:action="@{/kinogrisen/movies/{id}}"
+              th:object="${movie}" method="post">
+
+          <div>
+            <label>Hvad er navnet på filmen?</label>
+            <input type="text" th:field="*{movieTitle}" th:value="${movie.movieTitle}" required>
+          </div>
+
+          <div>
+            <label>En beskrivelse på filmen:</label>
+            <textarea th:field="*{description}" th:text="${movie.description}" required></textarea>
+          </div>
+
+          <div>
+            <label>Hvornår udkommer filmen?</label>
+            <input type="date" th:field="*{releaseDate}" th:value="${movie.releaseDate}" required>
+          </div>
+
+          <div>
+            <label>Hvad er slut datoen?</label>
+            <input type="date" th:field="*{endDate}" th:value="${movie.endDate}" required>
+          </div>
+
+          <div>
+            <label>Hvad er filmens genre?</label>
+            <input type="text" th:field="*{genre}" th:value="${movie.genre}" required>
+          </div>
+
+          <div>
+            <label>Hvor længe varer filmen?</label>
+            <input type="number" th:field="*{duration}" th:value="${movie.duration}" required>
+          </div>
+
+          <div>
+            <label>Er filmen kørende?</label>
+            <input type="checkbox" th:field="*{isActive}" th:value="${movie.isActive}" required>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Opdater film
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

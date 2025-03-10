@@ -1,5 +1,6 @@
 package org.example.kinogris.Controller;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Seat;
 import org.example.kinogris.Service.SeatService;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class SeatController {
     }
 
     @PostMapping("/kinogrisen/seats")
-    public Seat createSeat(@RequestBody Seat seat) {
+    public Seat createSeat(@Valid @RequestBody Seat seat) {
         return seatService.saveSeat(seat);
     }
 

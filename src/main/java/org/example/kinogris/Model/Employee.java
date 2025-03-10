@@ -1,6 +1,7 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employees")
@@ -12,6 +13,7 @@ public class Employee {
     private int employeeId;
 
     @Column(name = "name", nullable = false)
+    @NotBlank(message = "Navn mangler")
     private String name;
 
     @Enumerated(EnumType.STRING)

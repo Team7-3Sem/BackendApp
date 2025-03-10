@@ -1,5 +1,6 @@
 package org.example.kinogris.Service;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Employee;
 import org.example.kinogris.Repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Optional<Employee> updateEmployee(int id, Employee employeeDetails) {
+    public Optional<Employee> updateEmployee(int id, @Valid Employee employeeDetails) {
         return employeeRepository.findById(id).map(employee1 -> {
             employee1.setName(employeeDetails.getName());
             employee1.setRole(employeeDetails.getRole());

@@ -1,5 +1,6 @@
 package org.example.kinogris.Service;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Showing;
 import org.example.kinogris.Repository.ShowingRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ShowingService {
         return showingRepository.save(showing);
     }
 
-    public Optional<Showing> updateShowing(int id, Showing showingDetails) {
+    public Optional<Showing> updateShowing(int id, @Valid Showing showingDetails) {
         return showingRepository.findById(id).map(showing -> {
             showing.setMovie(showingDetails.getMovie());
             showing.setTheater(showingDetails.getTheater());

@@ -1,5 +1,6 @@
 package org.example.kinogris.Controller;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Showing;
 import org.example.kinogris.Service.ShowingService;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class ShowingController {
     }
 
     @PostMapping("/kinogrisen/showings")
-    public Showing createShowing(@RequestBody Showing showing) {
+    public Showing createShowing(@Valid @RequestBody Showing showing) {
         return showingService.saveShowing(showing);
     }
 

@@ -1,9 +1,13 @@
 package org.example.kinogris.Controller;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Movie;
 import org.example.kinogris.Service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -31,7 +35,7 @@ public class MovieController {
     }
 
     @PostMapping("/kinogrisen/movies")
-    public Movie createMovie(@RequestBody Movie movie) {
+    public Movie createMovie(@Valid @RequestBody Movie movie) {
         return movieService.saveMovie(movie);
     }
 

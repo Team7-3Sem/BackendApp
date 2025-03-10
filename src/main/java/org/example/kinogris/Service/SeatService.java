@@ -1,5 +1,6 @@
 package org.example.kinogris.Service;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Seat;
 import org.example.kinogris.Repository.SeatRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class SeatService {
         return seatRepository.save(seat);
     }
 
-    public Optional<Seat> updateSeat(int id, Seat seatDetails) {
+    public Optional<Seat> updateSeat(int id, @Valid Seat seatDetails) {
         return seatRepository.findById(id).map(seat -> {
                 seat.setSeatNumber(seatDetails.getSeatNumber());
                 seat.setRowNumber(seatDetails.getRowNumber());

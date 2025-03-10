@@ -1,6 +1,9 @@
 package org.example.kinogris.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,18 +22,23 @@ public class Reservation {
     private Showing showing;
 
     @Column(name = "customer_name", nullable = false)
+    @NotBlank(message = "Navn på kunde mangler")
     private String customerName;
 
     @Column(name = "customer_phone")
+    @NotBlank(message = "Telefonnummer mangler")
     private String customerPhone;
 
     @Column(name = "customer_email")
+    @NotBlank(message = "Email mangler")
     private String customerEmail;
 
     @Column(name = "reservation_time")
+    @NotBlank(message = "Reservationstid mangler")
     private LocalDate reservationTime;
 
     @Column(name = "reservation_date")
+    @NotBlank(message = "Reservationsdato mangler")
     private LocalDate reservationDate;
 
     @Column(name = "is_paid")
@@ -102,7 +110,7 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public boolean IsPaid() {
+    public boolean getIsPaid() {
         return isPaid;
     }
 

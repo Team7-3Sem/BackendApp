@@ -1,5 +1,6 @@
 package org.example.kinogris.Controller;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Employee;
 import org.example.kinogris.Service.EmployeeService;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/kinogrisen/employees")
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public Employee createEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 

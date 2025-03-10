@@ -1,6 +1,7 @@
 package org.example.kinogris.Controller;
 
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Reservation;
 import org.example.kinogris.Service.ReservationService;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class ReservationController {
     }
 
     @PostMapping("/kinogrisen/reservations")
-    public Reservation createReservation(@RequestBody Reservation reservation){
+    public Reservation createReservation(@Valid @RequestBody Reservation reservation){
         return reservationService.saveReservation(reservation);
     }
 

@@ -1,5 +1,6 @@
 package org.example.kinogris.Service;
 
+import jakarta.validation.Valid;
 import org.example.kinogris.Model.Reservation;
 import org.example.kinogris.Repository.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public  Optional<Reservation> updateReservationById(int id, Reservation reservationDetails) {
+    public  Optional<Reservation> updateReservationById(int id, @Valid Reservation reservationDetails) {
         return reservationRepository.findById(id).map(reservation -> {
             reservation.setReservationId(reservationDetails.getReservationId());
             reservation.setShowing(reservationDetails.getShowing());
