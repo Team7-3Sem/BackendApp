@@ -28,7 +28,7 @@ public class TheaterController {
         return theaterService.getTheaterById(id);
     }
 
-    @GetMapping("/kinogrisen/theaters/{id}/layout")
+    @GetMapping("/kinogrisen/theatres/{id}/layout")
     public List<Integer> getTheaterLayoutById(@PathVariable int id) {
         return theaterService.getTheaterLayoutById(id);
     }
