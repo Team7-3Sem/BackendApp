@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:5502")
+@RequestMapping("")
 @RestController
 public class TheaterController {
 
