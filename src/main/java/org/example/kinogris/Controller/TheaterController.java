@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
+@CrossOrigin(origins = "http://localhost:5502")
+@RequestMapping("")
 @RestController
 public class TheaterController {
 
@@ -38,9 +40,10 @@ public class TheaterController {
         return theaterService.createTheater(theater);
     }
 
-   // @GetMapping("/kinogrisen/theatres/statistics")
+   // @GetMapping("/kinogrisen/theatres/statis
     @PutMapping("kinogrisen/theatres/{id}")
     public ResponseEntity<Theater> updateTheater(@PathVariable int id, Theater theater) {
-    return null;
+    return theaterService.updateTheater(id, theater).map(ResponseEntity::ok).
+            orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

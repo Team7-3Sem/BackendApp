@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5502")
 @RestController
 @RequestMapping("")
 public class MovieController {
