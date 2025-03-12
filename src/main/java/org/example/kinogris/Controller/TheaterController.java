@@ -30,7 +30,7 @@ public class TheaterController {
         return theaterService.getTheaterById(id);
     }
 
-    @GetMapping("/kinogrisen/theaters/{id}/layout")
+    @GetMapping("/kinogrisen/theatres/{id}/layout")
     public List<Integer> getTheaterLayoutById(@PathVariable int id) {
         return theaterService.getTheaterLayoutById(id);
     }
@@ -45,5 +45,14 @@ public class TheaterController {
     public ResponseEntity<Theater> updateTheater(@PathVariable int id, Theater theater) {
     return theaterService.updateTheater(id, theater).map(ResponseEntity::ok).
             orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/kinogrisen/theatres/{id}")
+    public ResponseEntity<Theater> deleteTheater(@PathVariable int id) {
+        if (theaterService.deleteTheater(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

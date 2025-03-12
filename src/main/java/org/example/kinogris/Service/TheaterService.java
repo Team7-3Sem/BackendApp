@@ -55,4 +55,12 @@ public class TheaterService {
             return theaterRepository.save(Theater);
         });
     }
+
+    public boolean deleteTheater(int id){
+        if (theaterRepository.existsById(id)) {
+            theaterRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
