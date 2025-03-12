@@ -23,6 +23,9 @@ public class ReservationService {
     }
 
     public Optional<Reservation> getReservationById(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return reservationRepository.findById(id);
     }
 
@@ -31,6 +34,9 @@ public class ReservationService {
     }
 
     public  Optional<Reservation> updateReservationById(int id, @Valid Reservation reservationDetails) {
+        if(id <= 0){
+            throw new IllegalArgumentException("id must be greater than 0");
+        }
         return reservationRepository.findById(id).map(reservation -> {
             reservation.setReservationId(reservationDetails.getReservationId());
             reservation.setShowing(reservationDetails.getShowing());
@@ -46,6 +52,9 @@ public class ReservationService {
     }
 
     public boolean deleteReservation(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         if (reservationRepository.existsById(id)) {
             reservationRepository.deleteById(id);
             return true;

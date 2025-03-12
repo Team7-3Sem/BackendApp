@@ -22,6 +22,9 @@ public class EmployeeService {
     }
 
     public Optional<Employee> getEmployeeById(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return employeeRepository.findById(id);
     }
 
@@ -30,6 +33,9 @@ public class EmployeeService {
     }
 
     public Optional<Employee> updateEmployee(int id, @Valid Employee employeeDetails) {
+        if (id <= 0){
+            throw new IllegalArgumentException("id must be greater than 0");
+        }
         return employeeRepository.findById(id).map(employee1 -> {
             employee1.setName(employeeDetails.getName());
             employee1.setRole(employeeDetails.getRole());
@@ -38,6 +44,9 @@ public class EmployeeService {
     }
 
     public boolean deleteEmployee(int id) {
+        if (id <= 0){
+            throw new IllegalArgumentException("id must be greater than 0");
+        }
         if(employeeRepository.existsById(id)) {
             employeeRepository.deleteById(id);
             return true;
