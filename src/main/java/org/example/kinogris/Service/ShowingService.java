@@ -5,6 +5,7 @@ import org.example.kinogris.Model.Showing;
 import org.example.kinogris.Repository.ShowingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,9 @@ public class ShowingService {
     }
 
     public Showing saveShowing(Showing showing) {
+        if(isConflict(showing)){
+            throw new IllegalArgumentException("There is a conflict with this showing");
+        }
         return showingRepository.save(showing);
     }
 
@@ -46,5 +50,9 @@ public class ShowingService {
             return true;
         }
         return false;
+    }
+    public boolean isConflict(Showing showing) {
+        List<Showing> existingShowings = showingRepository.findByStartTimeBetween(showing.getStartTime(), showing.getEndTime());
+        return !existingShowings.isEmpty();
     }
 }
