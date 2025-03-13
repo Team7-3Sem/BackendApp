@@ -31,10 +31,11 @@ public class ReservationController {
     public List<Reservation> getAllReservations(){
         return reservationService.getAllReservations();
     }
-
+    
     @PostMapping("/kinogrisen/reservations")
-    public Reservation createReservation(@Valid @RequestBody Reservation reservation){
-        return reservationService.saveReservation(reservation);
+    public ResponseEntity<String> reserveSeats(@RequestBody ReservationRequest request) {
+        String message = reservationService.reserveSeats(request);
+        return ResponseEntity.ok(message);
     }
 
     @PutMapping("/kinogrisen/reservations/{id}")
