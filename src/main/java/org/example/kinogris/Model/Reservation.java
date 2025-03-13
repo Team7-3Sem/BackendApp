@@ -51,9 +51,9 @@ public class Reservation {
             joinColumns = @JoinColumn(name = "reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "seat_id")
     )
-    private Set<Seat> seats = new HashSet<>();
+    private List<Seat> seats;
 
-    protected Reservation() {}
+    public Reservation() {}
 
     public int getReservationId() {
         return reservationId;
