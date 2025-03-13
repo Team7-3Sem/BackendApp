@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "showings")
@@ -30,6 +31,9 @@ public class Showing {
     @Column(name = "end_time")
     @NotNull(message = "Sluttid mangler")
     private Date endTime;
+
+    @OneToMany
+    private List<Reservation> reservations;
 
     @Column(name = "is_active")
     private boolean isActive;
