@@ -32,13 +32,13 @@ public class MovieController {
     }
 
     @GetMapping("/kinogrisen/movies/{id}/reservation-count")
-    public ResponseEntity<Integer> getMovieReservationCount(@PathVariable int movieID) {
+    public ResponseEntity<Integer> getMovieReservationCount(@PathVariable int id) {
         // Check if movie exists
-        if (!movieService.getMovieById(movieID).isPresent()) {
+        if (!movieService.getMovieById(id).isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        int count = reservationService.countReservationsByMovieId(movieID);
+        int count = reservationService.countReservationsByMovieId(id);
         return ResponseEntity.ok(count);
     }
 
