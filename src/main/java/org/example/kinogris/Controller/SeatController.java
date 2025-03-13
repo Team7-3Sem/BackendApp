@@ -51,4 +51,9 @@ public class SeatController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("kinogrisen/availability/{showingId}")
+    public ResponseEntity<List<SeatAvailabilityDTO>> getSeatAvailability(@PathVariable int showingId) {
+        return ResponseEntity.ok(seatService.getSeatAvailability(showingId));
+    }
 }
