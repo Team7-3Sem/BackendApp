@@ -2,6 +2,7 @@ package org.example.kinogris.Controller;
 
 import jakarta.validation.Valid;
 import org.example.kinogris.Model.Seat;
+import org.example.kinogris.Model.SeatAvailabilityDTO;
 import org.example.kinogris.Service.SeatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
