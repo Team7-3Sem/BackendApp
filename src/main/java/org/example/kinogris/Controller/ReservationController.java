@@ -3,6 +3,7 @@ package org.example.kinogris.Controller;
 
 import jakarta.validation.Valid;
 import org.example.kinogris.Model.Reservation;
+import org.example.kinogris.Model.ReservationRequest;
 import org.example.kinogris.Service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
