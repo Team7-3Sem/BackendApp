@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -115,15 +116,15 @@ public class Reservation {
         return isPaid;
     }
 
-    public void setIsPaid(boolean paid) {
+    public void setPaid(boolean paid) {
         isPaid = paid;
     }
 
-    public Set<Seat> getSeats() {
+    public List<Seat> getSeats() {
         return seats;
     }
 
-    public void setSeats(Set<Seat> seats) {
+    public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
 }
