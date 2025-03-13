@@ -3,6 +3,7 @@ package org.example.kinogris.Controller;
 import jakarta.validation.Valid;
 import org.example.kinogris.Model.Movie;
 import org.example.kinogris.Service.MovieService;
+import org.example.kinogris.Service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,15 +18,28 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final ReservationService reservationService;
 
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, ReservationService reservationService) {
         this.movieService = movieService;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("/kinogrisen/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
+    }
+
+    @GetMapping("/kinogrisen/movies/{id}/reservation-count")
+    public ResponseEntity<Integer> getMovieReservationCount(@PathVariable int movieID) {
+        // Check if movie exists
+        if (!movieService.getMovieById(movieID).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        int count = reservationService.countReservationsByMovieId(movieID);
+        return ResponseEntity.ok(count);
     }
 
     @GetMapping("/kinogrisen/movies/{id}")
