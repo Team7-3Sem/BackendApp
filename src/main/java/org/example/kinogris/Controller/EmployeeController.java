@@ -25,7 +25,7 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/kinogrisen/{id}")
+    @GetMapping("/kinogrisen/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
         return employeeService.getEmployeeById(id)
                 .map(ResponseEntity::ok)

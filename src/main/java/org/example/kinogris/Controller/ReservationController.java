@@ -21,10 +21,15 @@ public class ReservationController {
     }
 
     @GetMapping("/kinogrisen/reservations/{id}")
-    public ResponseEntity<Reservation> getAllReservations(@PathVariable int id){
+    public ResponseEntity<Reservation> getReservationById(@PathVariable int id){
         return reservationService.getReservationById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/kinogrisen/reservations")
+    public List<Reservation> getAllReservations(){
+        return reservationService.getAllReservations();
     }
 
     @PostMapping("/kinogrisen/reservations")

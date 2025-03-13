@@ -22,6 +22,9 @@ public class MovieService {
     }
 
     public Optional<Movie> getMovieById(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return movieRepository.findById(id);
     }
 
@@ -30,6 +33,9 @@ public class MovieService {
     }
 
     public Optional<Movie> updateMovie(int id, @Valid Movie movieDetails) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return movieRepository.findById(id).map(movie -> {
             movie.setTitle(movieDetails.getTitle());
             movie.setGenre(movieDetails.getGenre());
@@ -44,6 +50,9 @@ public class MovieService {
     }
 
     public boolean deleteMovie(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         if (movieRepository.existsById(id)) {
             movieRepository.deleteById(id);
             return true;

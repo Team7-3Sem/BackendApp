@@ -22,6 +22,9 @@ public class SeatService {
     }
 
     public Optional<Seat> getSeatById(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return seatRepository.findById(id);
     }
 
@@ -30,6 +33,9 @@ public class SeatService {
     }
 
     public Optional<Seat> updateSeat(int id, @Valid Seat seatDetails) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         return seatRepository.findById(id).map(seat -> {
                 seat.setSeatNumber(seatDetails.getSeatNumber());
                 seat.setRowNumber(seatDetails.getRowNumber());
@@ -38,6 +44,9 @@ public class SeatService {
     }
 
     public boolean deleteSeat(int id) {
+        if(id <= 0){
+            throw new IllegalArgumentException("Id must be greater than 0");
+        }
         if (seatRepository.existsById(id)) {
             seatRepository.deleteById(id);
             return true;

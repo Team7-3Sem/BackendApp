@@ -19,7 +19,10 @@ public class TheaterService {
     }
 
     public Theater createTheater(Theater theater) {
-       return theaterRepository.save(theater);
+       if(theater == null) {
+           throw new IllegalArgumentException("The theater must not be null");
+       }
+        return theaterRepository.save(theater);
     }
 
     public Set<Theater> getTheatres(){
@@ -29,6 +32,9 @@ public class TheaterService {
     }
 
     public ResponseEntity<Theater> getTheaterById(int theaterId){
+        if(theaterId <= 0){
+            throw new IllegalArgumentException("The theater id must not be null");
+        }
         Optional<Theater> theater = theaterRepository.findById(theaterId);
         return theater.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -39,6 +45,9 @@ public class TheaterService {
      * @return
      */
     public List<Integer> getTheaterLayoutById(int theaterId){
+        if(theaterId <= 0){
+            throw new IllegalArgumentException("The theater id must not be null");
+        }
         List<Integer> theaterLayout = new ArrayList<>();
         Theater theater = theaterRepository.findById(theaterId).get();
         //Optional<Theater> theater = theaterRepository.findById(theaterId);
@@ -48,6 +57,9 @@ public class TheaterService {
     }
 
     public Optional<Theater>updateTheater(int id, @Valid Theater theater){
+        if(id <= 0){
+            throw new IllegalArgumentException("The id must not be null");
+        }
         return theaterRepository.findById(id).map(Theater ->{
             Theater.setTheaterName(theater.getTheaterName());
             Theater.setSeatsPerRow(theater.getSeatsPerRow());
