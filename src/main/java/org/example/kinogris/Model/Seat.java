@@ -51,4 +51,8 @@ public class Seat {
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
+
+    public Theater getTheater() {
+    return theater;
+    }
 }
