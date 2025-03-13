@@ -5,7 +5,6 @@ import org.example.kinogris.Model.Reservation;
 import org.example.kinogris.Repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,10 @@ public class ReservationService {
 
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
+    }
+
+    public int countReservationsByMovieId(int movieID) {
+        return reservationRepository.countReservationsByMovieId(movieID);
     }
 
     public Optional<Reservation> getReservationById(int id) {
