@@ -1,6 +1,7 @@
 package org.example.kinogris.Service;
 
 import jakarta.validation.Valid;
+import org.example.kinogris.Model.Seat;
 import org.example.kinogris.Model.Theater;
 import org.example.kinogris.Repository.TheaterRepository;
 import org.springframework.http.HttpStatus;
@@ -66,6 +67,16 @@ public class TheaterService {
             Theater.setRowCount(theater.getRowCount());
             return theaterRepository.save(Theater);
         });
+    }
+
+    public List<Seat> displayTheaterSeats(Theater theater){
+    List<Seat> seats = new ArrayList<>(theater.getSeats());
+    for (Seat seat : seats) {
+        System.out.println("SædeId: " + seat.getSeatId());
+        System.out.println("Sædenummer:  " + seat.getSeatNumber());
+        System.out.println("Rækkenummer: " + seat.getRowNumber());
+    }
+    return seats;
     }
 
     public boolean deleteTheater(int id){
