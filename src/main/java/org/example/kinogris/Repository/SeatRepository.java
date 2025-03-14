@@ -9,4 +9,5 @@ import java.util.Set;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
     Set<Seat> findBySeatId(int seatId);
+    List<Seat> findByTheater(Theater theater);
 }
