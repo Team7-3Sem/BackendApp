@@ -45,9 +45,9 @@ public class ReservationService {
     public Reservation saveReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
     }
-    /**
+
     public  Optional<Reservation> updateReservationById(int id, @Valid Reservation reservationDetails) {
-        if(id <= 0){
+        if (id <= 0) {
             throw new IllegalArgumentException("id must be greater than 0");
         }
         return reservationRepository.findById(id).map(reservation -> {
@@ -58,46 +58,48 @@ public class ReservationService {
             reservation.setCustomerEmail(reservationDetails.getCustomerEmail());
             reservation.setReservationTime(reservationDetails.getReservationTime());
             reservation.setReservationDate(reservationDetails.getReservationDate());
-            reservation.setIsPaid(reservationDetails.getIsPaid());
+            reservation.setPaid(reservationDetails.getIsPaid());
             return reservationRepository.save(reservation);
         });
-**/
-public String reserveSeats(ReservationRequest request) {
-        // Fetch the showing
-        Showing showing = showingRepository.findById(request.getShowingId())
-                .orElseThrow(() -> new RuntimeException("Showing not found"));
-
-        // Fetch the selected seats
-        List<Seat> seats = seatRepository.findAllById(request.getSeatIds());
-
-        // Create the reservation
-        Reservation reservation = new Reservation();
-        reservation.setShowing(showing);
-        reservation.setCustomerName(request.getCustomerName());
-        reservation.setCustomerPhone(request.getCustomerPhone());
-        reservation.setCustomerEmail(request.getCustomerEmail());
-        reservation.setReservationTime(new Date());
-        reservation.setReservationDate(new Date()); // Assuming it's for today
-        reservation.setPaid(false);
-        reservation.setSeats(seats);
-
-        // Save the reservation
-        reservationRepository.save(reservation);
-
-        return "Seats successfully reserved!";
-    }
-    
     }
 
-    public boolean deleteReservation(int id) {
-        if(id <= 0){
-            throw new IllegalArgumentException("Id must be greater than 0");
+        public String reserveSeats (ReservationRequest request){
+            // Fetch the showing
+            Showing showing = showingRepository.findById(request.getShowingId())
+                    .orElseThrow(() -> new RuntimeException("Showing not found"));
+
+            // Fetch the selected seats
+            List<Seat> seats = seatRepository.findAllById(request.getSeatIds());
+
+            // Create the reservation
+            Reservation reservation = new Reservation();
+            reservation.setShowing(showing);
+            reservation.setCustomerName(request.getCustomerName());
+            reservation.setCustomerPhone(request.getCustomerPhone());
+            reservation.setCustomerEmail(request.getCustomerEmail());
+            reservation.setReservationTime(new Date());
+            reservation.setReservationDate(new Date()); // Assuming it's for today
+            reservation.setPaid(false);
+            reservation.setSeats(seats);
+
+            // Save the reservation
+            reservationRepository.save(reservation);
+
+            return "Seats successfully reserved!";
         }
-        if (reservationRepository.existsById(id)) {
-            reservationRepository.deleteById(id);
-            return true;
+
+
+        public boolean deleteReservation ( int id){
+            if (id <= 0) {
+                throw new IllegalArgumentException("Id must be greater than 0");
+            }
+            if (reservationRepository.existsById(id)) {
+                reservationRepository.deleteById(id);
+                return true;
+            }
+            return false;
         }
-        return false;
     }
-}
+
+
 
