@@ -57,4 +57,10 @@ public class SeatController {
     public ResponseEntity<List<SeatAvailabilityDTO>> getSeatAvailability(@PathVariable int showingId) {
         return ResponseEntity.ok(seatService.getSeatAvailability(showingId));
     }
+
+    @GetMapping("kinogrisen/seats/generateseats/{theaterId}/{rows}/{seatsPerRow}")
+    public ResponseEntity<String> generateSeats(@PathVariable int theaterId, @PathVariable int rows, @PathVariable int seatsPerRow) {
+        String message = seatService.generateSeatsForTheatre(theaterId, rows, seatsPerRow);
+        return ResponseEntity.ok(message);
+    }
 }

@@ -24,10 +24,16 @@ public class Seat {
     @NotNull(message = "Rækkenummer mangler")
     private int rowNumber;
 
-    protected Seat() {}
+    public Seat() {}
 
     public Seat(Theater theater, int seatNumber, int rowNumber) {
         this.theater = theater;
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
+    }
+
+    public Seat(int theaterId, int seatNumber, int rowNumber) {
+        this.theater = new Theater();
         this.seatNumber = seatNumber;
         this.rowNumber = rowNumber;
     }
@@ -54,5 +60,9 @@ public class Seat {
 
     public Theater getTheater() {
     return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
     }
 }

@@ -4,11 +4,14 @@ import jakarta.validation.Valid;
 import org.example.kinogris.Model.Seat;
 import org.example.kinogris.Model.SeatAvailabilityDTO;
 import org.example.kinogris.Model.Showing;
+import org.example.kinogris.Model.Theater;
 import org.example.kinogris.Repository.ReservationRepository;
 import org.example.kinogris.Repository.SeatRepository;
 import org.example.kinogris.Repository.ShowingRepository;
+import org.example.kinogris.Repository.TheaterRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,11 +22,13 @@ public class SeatService {
     private final SeatRepository seatRepository;
     private final ShowingRepository showingRepository;
     private final ReservationRepository reservationRepository;
+    private final TheaterRepository theaterRepository;
 
-    public SeatService(SeatRepository seatRepository, ReservationRepository reservationRepository, ShowingRepository showingRepository) {
+    public SeatService(SeatRepository seatRepository, ReservationRepository reservationRepository, ShowingRepository showingRepository, TheaterRepository theaterRepository) {
         this.seatRepository = seatRepository;
         this.reservationRepository = reservationRepository;
         this.showingRepository = showingRepository;
+        this.theaterRepository = theaterRepository;
     }
 
     public List<Seat> getAllSeats() {
@@ -82,5 +87,24 @@ public class SeatService {
                         reservedSeats.contains(seat) // true if reserved, false otherwise
                 )
         ).collect(Collectors.toList());
+    }
+
+    public String generateSeatsForTheatre(int theaterId, int rows, int seatsPerRow) {
+        Theater theatre = theaterRepository.findById(theaterId)
+                .orElseThrow(() -> new RuntimeException("Theatre not found"));
+
+        List<Seat> seats = new ArrayList<>();
+
+        for (int row = 1; row <= rows; row++) {
+            for (int seatNum = 1; seatNum <= seatsPerRow; seatNum++) {
+                Seat seat = new Seat();
+                seat.setRowNumber(row);
+                seat.setSeatNumber(seatNum);
+                seat.setTheater(theatre);
+                seats.add(seat);
+            }
+        }
+        seatRepository.saveAll(seats);
+        return "Successfully added " + (rows * seatsPerRow) + " seats to Theatre " + theatre.getTheaterName();
     }
 }
