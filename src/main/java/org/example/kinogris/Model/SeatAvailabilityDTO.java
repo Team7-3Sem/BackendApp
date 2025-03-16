@@ -1,8 +1,12 @@
 package org.example.kinogris.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class SeatAvailabilityDTO {
     private int seatId;
+    @JsonProperty("rowNumber")
     private int row;
+    @JsonProperty("seatNumber")
     private int number;
     private boolean reserved;
 
