@@ -53,6 +53,9 @@ public class Movie {
     @JsonIgnoreProperties("movie")
     private List<Showing> showings;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     protected Movie() {}
 
     public int getMovieID() {
@@ -133,5 +136,13 @@ public class Movie {
 
     public void setShowings(List<Showing> showings) {
         this.showings = showings;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
