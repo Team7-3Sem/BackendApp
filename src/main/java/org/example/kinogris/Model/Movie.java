@@ -1,5 +1,6 @@
 package org.example.kinogris.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +50,11 @@ public class Movie {
     private boolean isActive;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("movie")
     private List<Showing> showings;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
     protected Movie() {}
 
@@ -131,5 +136,13 @@ public class Movie {
 
     public void setShowings(List<Showing> showings) {
         this.showings = showings;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

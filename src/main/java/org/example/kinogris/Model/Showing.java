@@ -1,10 +1,12 @@
 package org.example.kinogris.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "showings")
@@ -17,10 +19,12 @@ public class Showing {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
+    @JsonIgnoreProperties("showings")
     private Movie movie;
 
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
+    @JsonIgnoreProperties("showings")
     private Theater theater;
 
     @Column(name = "start_time")
@@ -30,6 +34,10 @@ public class Showing {
     @Column(name = "end_time")
     @NotNull(message = "Sluttid mangler")
     private Date endTime;
+
+    @OneToMany
+    @JsonIgnoreProperties("showing")
+    private List<Reservation> reservations;
 
     @Column(name = "is_active")
     private boolean isActive;
